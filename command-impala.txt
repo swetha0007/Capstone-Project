@@ -1,0 +1,30 @@
+HIVE QUERIES(TABLE CREATION AND LOADING THE DATA)
+
+use anabig114210
+
+drop table if exists employees;
+CREATE EXTERNAL TABLE employees STORED AS AVRO LOCATION '/user/anabig114210/hive/warehouse/employees' TBLPROPERTIES ('avro.schema.url'='/user/anabig114210/original/employees.avsc');
+
+drop table if exists titles;
+CREATE EXTERNAL TABLE titles STORED AS AVRO LOCATION '/user/anabig114210/hive/warehouse/titles' TBLPROPERTIES ('avro.schema.url'='/user/anabig114210/original/titles.avsc');
+
+drop table if exists salaries;
+CREATE EXTERNAL TABLE salaries STORED AS AVRO LOCATION '/user/anabig114210/hive/warehouse/salaries' TBLPROPERTIES ('avro.schema.url'='/user/anabig114210/original/salaries.avsc');
+
+
+drop table if exists department;
+CREATE EXTERNAL TABLE department STORED AS AVRO LOCATION '/user/anabig114210/hive/warehouse/department' TBLPROPERTIES ('avro.schema.url'='/user/anabig114210/original/department.avsc');
+
+drop table if exists dept_manager;
+CREATE EXTERNAL TABLE dept_manager STORED AS AVRO LOCATION '/user/anabig114210/hive/warehouse/dept_manager' TBLPROPERTIES ('avro.schema.url'='/user/anabig114210/original/dept_manager.avsc');
+
+
+drop table if exists dept_emp;
+CREATE EXTERNAL TABLE dept_emp STORED AS AVRO LOCATION '/user/anabig114210/hive/warehouse/dept_emp' TBLPROPERTIES ('avro.schema.url'='/user/anabig114210/original/dept_emp.avsc');
+
+impala-shell -i ip-10-1-2-103.ap-south-1.compute.internal -d default
+
+
+
+
+

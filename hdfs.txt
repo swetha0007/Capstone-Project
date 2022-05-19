@@ -1,0 +1,26 @@
+HDFS COMMANDS
+
+
+hdfs dfs -rm -r /user/anabig1142410/hive/warehouse/departments/*
+hdfs dfs -rm -r /user/anabig1142410/hive/warehouse/employees/*
+hdfs dfs -rm -r /user/anabig1142410/hive/warehouse/titles/*
+hdfs dfs -rm -r /user/anabig1142410/hive/warehouse/salaries/*
+hdfs dfs -rm -r /user/anabig1142410/hive/warehouse/dept_manager/*
+hdfs dfs -rm -r /user/anabig1142410/hive/warehouse/dept_emp/*
+
+hdfs dfs -ls /user/anabig114240/hive/warehouse
+
+hdfs dfs -ls /user/anabig114210/hive/warehouse/department  
+
+ls -l /home/anabig1142410/*.avsc
+
+hdfs dfs -ls /user/anabig114210/new 
+
+hadoop fs -chmod +rw /user/anabig114210/new 
+
+hadoop fs -put /home/anabig114210/employees.avsc /user/anabig114210/original/employees.parquet
+hadoop fs -put /home/anabig114210/titles.avsc /user/anabig114210/original/titles.avsc
+hadoop fs -put /home/anabig114210/salaries.avsc /user/anabig114210/original/salaries.avsc
+hadoop fs -put /home/anabig114210/department.avsc /user/anabig114210/original/department.avsc
+hadoop fs -put /home/anabig114210/dept_manager.avsc /user/anabig114210/original/dept_manager.avsc
+hadoop fs -put /home/anabig114210/dept_emp.avsc /user/anabig114210/original/dept_emp

@@ -1,0 +1,17 @@
+sqoop commands for importing data from mysql to hive 
+
+1.sqoop import-all-tables  --connect jdbc:mysql://ip-10-1-1-204.ap-south-1.compute.internal:3306/anabig114210 --username anabig114210 --password Bigdata123 --compression-codec=snappy --as-avrodatafile --warehouse-dir=/user/anabig114210/hive/warehouse --driver com.mysql.jdbc.Driver
+
+sqoop import --connect jdbc:mysql://ip-10-1-1-204.ap-south-1.compute.internal:3306/anabig114210 --username anabig114210 --password Bigdata123 --table employees --compression-codec=snappy --as-avrodatafile --warehouse-dir=/user/anabig114216/hive/warehouse --driver com.mysql.jdbc.Driver --m 1 --driver com.mysql.jdbc.Driver
+
+2.sqoop import --connect jdbc:mysql://ip-10-1-1-204.ap-south-1.compute.internal:3306/anabig114210 --username anabig114210 --password Bigdata123 --table titles --compression-codec=snappy --as-avrodatafile --warehouse-dir=/user/anabig114216/hive/warehouse --driver com.mysql.jdbc.Driver --m 1 --driver com.mysql.jdbc.Driver
+
+
+3.sqoop import --connect jdbc:mysql://ip-10-1-1-204.ap-south-1.compute.internal:3306/anabig114210 --username anabig114210 --password Bigdata123 --table salaries --compression-codec=snappy --as-avrodatafile --warehouse-dir=/user/anabig114216/hive/warehouse --driver com.mysql.jdbc.Driver --m 1 --driver com.mysql.jdbc.Driver
+
+
+4.sqoop import --connect jdbc:mysql://ip-10-1-1-204.ap-south-1.compute.internal:3306/anabig114210 --username anabig114210 --password Bigdata123 --table dept_manager --compression-codec=snappy --as-avrodatafile --warehouse-dir=/user/anabig114210/hive/warehouse --driver com.mysql.jdbc.Driver --m 1 --driver com.mysql.jdbc.Driver
+
+5.sqoop import --connect jdbc:mysql://ip-10-1-1-204.ap-south-1.compute.internal:3306/anabig114210 --username anabig114216 --password Bigdata123 --table dept_emp --compression-codec=snappy --as-avrodatafile --warehouse-dir=/user/anabig114210/hive/warehouse --driver com.mysql.jdbc.Driver --m 1 --driver com.mysql.jdbc.Driver
+
+6.sqoop import --connect jdbc:mysql://ip-10-1-1-204.ap-south-1.compute.internal:3306/anabig114210 --username anabig114210 --password Bigdata123 --table department --compression-codec=snappy --as-avrodatafile --warehouse-dir=/user/anabig114210/hive/warehouse --driver com.mysql.jdbc.Driver --m 1 --driver com.mysql.jdbc.Driver

@@ -1,0 +1,123 @@
+TABLE CREATION AND LOADING DATA INTO MYSQL
+
+1.--create table for employees
+    create table employees
+    emp_no INT PRIMARY KEY NOT NULL,
+    emp_title VARCHAR(10) NOT NULL,
+	birth_date DATE NOT NULL,
+	first_name VARCHAR(35) NOT NULL,
+	last_name VARCHAR(35) NOT NULL,
+	sex VARCHAR(1)NOT NULL,
+	hire_date DATE NOT NULL,
+     no_of_projects INT NOT NULL,
+     Last_performance_rating VARCHAR(2) NOT NULL,
+     left_PPL INT NOT NULL,
+     last_date DATE NOT NULL
+);
+
+1.LOAD DATA LOCAL INFILE '/home/anabig114210/employees.csv' INTO TABLE employees FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\n' IGNORE 1 LINES; 
+
+--create table for departments
+
+2.CREATE TABLE departments (
+    dept_no     VARCHAR(4)         NOT NULL,
+    dept_name   VARCHAR(40)     NOT NULL,
+    PRIMARY KEY (dept_no),
+    UNIQUE   	(dept_name)
+);
+2.LOAD DATA LOCAL INFILE '/home/anabig114210/departments.csv' INTO TABLE departments FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\n' IGNORE 1 LINES;
+
+3.--create table for department manager
+
+CREATE TABLE dept_manager (
+   dept_no      VARCHAR(4)         NOT NULL,
+   emp_no       INT             NOT NULL,
+   FOREIGN KEY (emp_no)  REFERENCES employees (emp_no),
+   FOREIGN KEY (dept_no) REFERENCES departments (dept_no),
+   PRIMARY KEY (emp_no,dept_no)
+);
+3.LOAD DATA LOCAL INFILE '/home/anabig114210/dept_manager.csv' INTO TABLE dept_manager FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\n' IGNORE 1 LINES; 
+
+4.--create table for department employees
+CREATE TABLE dept_emp (
+    emp_no      INT             NOT NULL,
+    dept_no     VARCHAR(4)         NOT NULL,
+    FOREIGN KEY (emp_no)  REFERENCES employees   (emp_no),
+    FOREIGN KEY (dept_no) REFERENCES departments (dept_no),
+    PRIMARY KEY (emp_no,dept_no)
+);
+
+4. LOAD DATA LOCAL INFILE '/home/anabig114210/dept_emp.csv' INTO TABLE dept_emp FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\n' IGNORE 1 LINES; 
+
+
+5.--create table for titles
+
+create table titles( title_id varchar(10) NOT NULL, title varchar(30) NOT NULL,PRIMARY KEY(title_id) );     
+
+5.DATA LOCAL INFILE '/home/anabig114210/titles.csv' INTO TABLE titles FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\n' IGNORE 1 LINES; 
+
+	 
+6.)--create table for salaries
+CREATE TABLE salaries (
+    emp_no      INT             NOT NULL,
+    salary      INT             NOT NULL,
+    FOREIGN KEY (emp_no) REFERENCES employees (emp_no),
+    PRIMARY KEY (emp_no)
+);
+6)LOAD DATA LOCAL INFILE '/home/anabig114210/employees.csv' INTO TABLE employees FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\n' IGNORE 1 LINES; 
+
+
+LOAD DATA LOCAL INFILE '/home/anabig114210/departments.csv' INTO TABLE departments FIELDS TERMINATED BY ',' optionally ENCLOSED BY '"' LINES TERMINATED BY '\n' IGNORE 1
+ LINES;   
+ 
+     QUERIES
+  Exploratory Data Analysis 
+
+1. select s.emp_no, e.last_name, e.first_name, e.sex, s.salary
+   from employees as e 
+   inner join salaries as s on s.emp_no = e.emp_no 
+   order by s.emp_no limit 10; 
+   
+2. select emp_no, last_name, first_name, hire_date 
+  from employees where extract(year from hire_date) = 1986;
+  
+3.select  dm.dept_no,d.dept_name,dm.emp_no,e.last_name,e.first_name,
+  from dept_manager as dm inner join departments as d 
+  on (dm.dept_no = d.dept_no) 
+  inner join employees as e on (dm.emp_no = e.emp_no);
+
+4.select e.last_name, e.first_name from employees as e
+   where (e.first_name = 'Hercules') and (lower(e.last_name) like 'b%')
+   order by e.last_name;
+
+5.select e.emp_no, e.last_name, e.first_name, d.dept_name from employees as e 
+  inner join dept_emp as de on e.emp_no = de.emp_no inner join departments as d 
+  on de.dept_no = d.dept_no where lower(d.dept_name) = 'sales' limit 10;
+
+6.select  e.emp_no, e.last_name, e.first_name, d.dept_name from employees as e 
+ inner join dept_emp as de on (e.emp_no = de.emp_no) inner join departments as d 
+ on (de.dept_no = d.dept_no) where d.dept_name in ('Sales', 'Development') order by e.emp_no limit 12;   
+
+7.select last_name,count(last_name) as Frequency from employees 
+group by last_name order by frequency desc;
+
+10.select CONCAT(first_name," ",last_name," ")AS EmployeeName,emp_no,1986-year(hire_date) 
+as tenure from employees order by tenure desc limit 10;            
+
+
+11.1a)select * from salaries where salary>=30000 limit 20;  
+
+2a) select emp_no from employees where left_PPL=1' limit=10;   
+
+3a)SELECT dept_name,COUNT(dept_name) AS Employees_count 
+  FROM   employeesmployee GROUP  BY dept_name limit 10;
+
+4)SELECT * FROM employees WHERE FLOOR(EXTRACT(YEAR FROM last_date)*12)-FLOOR(EXTRACT(YEAR FROM hire_date)*12);  ##SQL query to find the employees hired in last n months.
+
+5)select dept_no,count(*),avg(salary) from departments,salaries group by dept_no;
+(For each department, retrieve the department number, the number of
+employees in the department, and their average salary)
+
+
+
+ 
